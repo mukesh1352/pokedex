@@ -1,6 +1,8 @@
 @font-face {
     font-family: 'PokemonFont';
-    src: url('./fonts/POKEMON.TTF') format('truetype');
+    src: url('./fonts/POKEMON.woff2') format('woff2'),
+         url('./fonts/POKEMON.woff') format('woff'),
+         url('./fonts/POKEMON.ttf') format('truetype');
 }
 
 .header-container {
@@ -40,6 +42,7 @@
 }
 
 .box-container{
+    background-color: white;
     border: 1px solid black;
     margin-top: 10px;
     width: 50vh;
@@ -51,11 +54,5 @@
     justify-content: center;
 }
 body {
-    background-image: url('path/to/your-image.jpg'); 
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat; 
-    background-attachment: fixed; 
-    margin: 0;
-    height: 100vh; 
+    background-color: #6e2b88;
 }
