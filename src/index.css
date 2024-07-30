@@ -50,3 +50,7 @@
 body {
     background-color: #6e2b88;
 }
+
+.hover-box:hover{
+    cursor: pointer;
+}
