@@ -21,7 +21,13 @@ function Search({ searchTerm, onSearchTermChange, typeFilter, onTypeFilterChange
                 <option value="grass">Grass</option>
                 <option value="fire">Fire</option>
                 <option value="water">Water</option>
-                {/* Add more types as needed */}
+                <option value = "poison">Poison</option>
+                <option value = "bug">Bug</option>
+                <option value = "normal">Normal</option>
+                <option value = "flying">Flying</option>
+                <option value= "electric">Electric</option>
+                <option value = "ground">ground</option>
+                <option value = "pyschic">Pyschic</option>
             </select>
             <FontAwesomeIcon icon={faFilter} className='hover-box'/>
         </div>
@@ -36,3 +42,4 @@ Search.propTypes = {
 };
 
 export default Search;
+    
