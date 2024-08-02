@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
 function Search({ searchTerm, onSearchTermChange, typeFilter, onTypeFilterChange }) {
@@ -31,7 +29,6 @@ function Search({ searchTerm, onSearchTermChange, typeFilter, onTypeFilterChange
                 <option value="ground">Ground</option>
                 <option value="rock">Rock</option>
             </select>
-            <FontAwesomeIcon icon={faFilter} className='hover-box'/>
         </div>
     );
 }
