@@ -28,6 +28,8 @@ function Search({ searchTerm, onSearchTermChange, typeFilter, onTypeFilterChange
                 <option value= "electric">Electric</option>
                 <option value = "ground">ground</option>
                 <option value = "pyschic">Pyschic</option>
+                <option value="ground">Ground</option>
+                <option value="rock">Rock</option>
             </select>
             <FontAwesomeIcon icon={faFilter} className='hover-box'/>
         </div>
