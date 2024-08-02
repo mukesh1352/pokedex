@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Box from './Box.jsx';
+import PropTypes from 'prop-types';
 
-function Api() {
+function Api({ searchTerm, typeFilter }) {
     const [pokemonList, setPokemonList] = useState([]);
-    const [loading, setLoading] = useState(true);  // Added loading state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchPokemonList() {
             try {
-                // Fetch the list of Pokemon
-                const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000'); 
+                const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000');
                 const pokemonResults = response.data.results;
-                console.log('Pokemon list fetched:', pokemonResults); 
 
-                // Fetch details for each Pokemon
                 const pokemonDetails = await Promise.all(
                     pokemonResults.map(async (pokemon) => {
                         const pokemonData = await axios.get(pokemon.url);
@@ -25,31 +23,38 @@ function Api() {
                         const image = data.sprites.front_default;
                         const type = data.types.map(typeInfo => typeInfo.type.name);
 
-                        return { id,name, hp, image, type };
+                        return { id, name, hp, image, type };
                     })
                 );
 
-                pokemonDetails.sort((a,b)=>a.id - b.id);
+                pokemonDetails.sort((a, b) => a.id - b.id);
                 setPokemonList(pokemonDetails);
-                setLoading(false);  
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching the Pokemon data', error);
-                setLoading(false); 
+                setLoading(false);
             }
         }
 
         fetchPokemonList();
     }, []);
 
+    const filteredPokemonList = pokemonList.filter((pokemon) => {
+        const matchesName = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesType = typeFilter === '' || pokemon.type.includes(typeFilter);
+
+        return matchesName && matchesType;
+    });
+
     return (
         <div className='pokemon-list'>
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                pokemonList.length > 0 ? (
-                    pokemonList.map((pokemon, index) => (
+                filteredPokemonList.length > 0 ? (
+                    filteredPokemonList.map((pokemon, index) => (
                         <Box
-                            id = {pokemon.id}
+                            id={pokemon.id}
                             key={index}
                             name={pokemon.name}
                             hp={pokemon.hp}
@@ -64,5 +69,10 @@ function Api() {
         </div>
     );
 }
+
+Api.propTypes = {
+    searchTerm: PropTypes.string.isRequired,
+    typeFilter: PropTypes.string.isRequired,
+};
 
 export default Api;
